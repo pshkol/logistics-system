@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid, Card, Stack, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // auth
-import { useAuthContext } from '../../../../auth/useAuthContext';
+import { useUser } from '@clerk/nextjs';
 // utils
 import { fData } from '../../../../utils/formatNumber';
 // assets
@@ -41,7 +41,7 @@ type FormValuesProps = {
 export default function AccountGeneral() {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { user } = useAuthContext();
+  const { user } = useUser();
 
   const UpdateUserSchema = Yup.object().shape({
     displayName: Yup.string().required('Name is required'),
@@ -57,17 +57,17 @@ export default function AccountGeneral() {
   });
 
   const defaultValues = {
-    displayName: user?.displayName || '',
-    email: user?.email || '',
-    photoURL: user?.photoURL || null,
-    phoneNumber: user?.phoneNumber || '',
-    country: user?.country || '',
-    address: user?.address || '',
-    state: user?.state || '',
-    city: user?.city || '',
-    zipCode: user?.zipCode || '',
-    about: user?.about || '',
-    isPublic: user?.isPublic || false,
+    displayName: user?.fullName || '',
+    email: user?.primaryEmailAddress?.emailAddress || '',
+    photoURL: user?.profileImageUrl || null,
+    phoneNumber: user?.primaryPhoneNumber?.phoneNumber || '',
+    country: '',
+    address: '',
+    state: '',
+    city: '',
+    zipCode: '',
+    about: '',
+    isPublic: false,
   };
 
   const methods = useForm<FormValuesProps>({

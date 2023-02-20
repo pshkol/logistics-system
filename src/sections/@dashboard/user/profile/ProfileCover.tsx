@@ -1,12 +1,12 @@
 // @mui
 import { styled } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
+// auth
+import { useUser } from '@clerk/nextjs';
 // @types
 import { IUserProfileCover } from '../../../../@types/user';
 // utils
 import { bgBlur } from '../../../../utils/cssStyles';
-// auth
-import { useAuthContext } from '../../../../auth/useAuthContext';
 // components
 import Image from '../../../../components/image';
 import { CustomAvatar } from '../../../../components/custom-avatar';
@@ -45,15 +45,15 @@ const StyledInfo = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function ProfileCover({ name, role, cover }: IUserProfileCover) {
-  const { user } = useAuthContext();
+  const { user } = useUser();
 
   return (
     <StyledRoot>
       <StyledInfo>
         <CustomAvatar
-          src={user?.photoURL}
-          alt={user?.displayName}
-          name={user?.displayName}
+          src={user?.profileImageUrl}
+          alt={user?.fullName as string}
+          name={user?.fullName as string}
           sx={{
             mx: 'auto',
             borderWidth: 2,

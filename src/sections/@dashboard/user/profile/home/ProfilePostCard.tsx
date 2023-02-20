@@ -15,10 +15,10 @@ import {
   InputAdornment,
   FormControlLabel,
 } from '@mui/material';
+// auth
+import { useUser } from '@clerk/nextjs';
 // @types
 import { IUserProfilePost } from '../../../../../@types/user';
-// auth
-import { useAuthContext } from '../../../../../auth/useAuthContext';
 // utils
 import { fDate } from '../../../../../utils/formatTime';
 import { fShortenNumber } from '../../../../../utils/formatNumber';
@@ -34,7 +34,7 @@ interface Props {
 }
 
 export default function ProfilePostCard({ post }: Props) {
-  const { user } = useAuthContext();
+  const { user } = useUser();
 
   const commentInputRef = useRef<HTMLInputElement>(null);
 
@@ -81,11 +81,15 @@ export default function ProfilePostCard({ post }: Props) {
       <CardHeader
         disableTypography
         avatar={
-          <CustomAvatar src={user?.photoURL} alt={user?.displayName} name={user?.displayName} />
+          <CustomAvatar
+            src={user?.profileImageUrl}
+            alt={user?.fullName as string}
+            name={user?.fullName as string}
+          />
         }
         title={
           <Link color="inherit" variant="subtitle2">
-            {user?.displayName}
+            {user?.fullName}
           </Link>
         }
         subheader={
@@ -192,7 +196,11 @@ export default function ProfilePostCard({ post }: Props) {
           p: (theme) => theme.spacing(0, 3, 3, 3),
         }}
       >
-        <CustomAvatar src={user?.photoURL} alt={user?.displayName} name={user?.displayName} />
+        <CustomAvatar
+          src={user?.profileImageUrl}
+          alt={user?.fullName as string}
+          name={user?.fullName as string}
+        />
 
         <InputBase
           fullWidth

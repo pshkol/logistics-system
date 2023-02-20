@@ -3,10 +3,10 @@ import { useState } from 'react';
 import Head from 'next/head';
 // @mui
 import { Tab, Card, Tabs, Container, Box } from '@mui/material';
+// auth
+import { useUser } from '@clerk/nextjs';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
-// auth
-import { useAuthContext } from '../../../auth/useAuthContext';
 // _mock_
 import {
   _userAbout,
@@ -39,7 +39,7 @@ UserProfilePage.getLayout = (page: React.ReactElement) => <DashboardLayout>{page
 export default function UserProfilePage() {
   const { themeStretch } = useSettingsContext();
 
-  const { user } = useAuthContext();
+  const { user } = useUser();
 
   const [searchFriends, setSearchFriends] = useState('');
 
@@ -92,7 +92,7 @@ export default function UserProfilePage() {
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
             { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: user?.displayName },
+            { name: user?.fullName as string },
           ]}
         />
         <Card
@@ -102,7 +102,11 @@ export default function UserProfilePage() {
             position: 'relative',
           }}
         >
-          <ProfileCover name={user?.displayName} role={_userAbout.role} cover={_userAbout.cover} />
+          <ProfileCover
+            name={user?.fullName as string}
+            role={_userAbout.role}
+            cover={_userAbout.cover}
+          />
 
           <Tabs
             value={currentTab}

@@ -2,6 +2,7 @@
 import { useTheme } from '@mui/material/styles';
 import { Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 // utils
+import { UserButton } from '@clerk/nextjs';
 import { bgBlur } from '../../../utils/cssStyles';
 // hooks
 import useOffSetTop from '../../../hooks/useOffSetTop';
@@ -14,7 +15,6 @@ import Iconify from '../../../components/iconify';
 import { useSettingsContext } from '../../../components/settings';
 //
 import Searchbar from './Searchbar';
-import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import ContactsPopover from './ContactsPopover';
 import NotificationsPopover from './NotificationsPopover';
@@ -63,7 +63,7 @@ export default function Header({ onOpenNav }: Props) {
 
         <ContactsPopover />
 
-        <AccountPopover />
+        <UserButton />
       </Stack>
     </>
   );

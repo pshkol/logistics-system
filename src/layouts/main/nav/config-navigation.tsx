@@ -1,5 +1,5 @@
 // routes
-import { PATH_AUTH, PATH_DOCS, PATH_PAGE } from '../../../routes/paths';
+import { PATH_DOCS, PATH_PAGE } from '../../../routes/paths';
 // config
 import { PATH_AFTER_LOGIN } from '../../../config-global';
 // components
@@ -33,15 +33,6 @@ const navConfig = [
           { title: 'Payment', path: PATH_PAGE.payment },
           { title: 'Maintenance', path: PATH_PAGE.maintenance },
           { title: 'Coming Soon', path: PATH_PAGE.comingSoon },
-        ],
-      },
-      {
-        subheader: 'Authentication',
-        items: [
-          { title: 'Login', path: PATH_AUTH.loginUnprotected },
-          { title: 'Register', path: PATH_AUTH.registerUnprotected },
-          { title: 'Reset password', path: PATH_AUTH.resetPassword },
-          { title: 'Verify code', path: PATH_AUTH.verify },
         ],
       },
       {

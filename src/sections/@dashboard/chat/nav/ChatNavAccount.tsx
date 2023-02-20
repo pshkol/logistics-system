@@ -11,7 +11,7 @@ import {
   IconButton,
 } from '@mui/material';
 // auth
-import { useAuthContext } from '../../../../auth/useAuthContext';
+import { useUser } from '@clerk/nextjs';
 // components
 import Iconify from '../../../../components/iconify';
 import { CustomAvatar } from '../../../../components/custom-avatar';
@@ -23,7 +23,7 @@ import BadgeStatus, { BadgeStatusValue } from '../../../../components/badge-stat
 const STATUS = ['online', 'invisible', 'away'] as const;
 
 export default function ChatNavAccount() {
-  const { user } = useAuthContext();
+  const { user } = useUser();
 
   const [status, setStatus] = useState<BadgeStatusValue>('online');
 
@@ -40,9 +40,9 @@ export default function ChatNavAccount() {
   return (
     <>
       <CustomAvatar
-        src={user?.photoURL}
-        alt={user?.displayName}
-        name={user?.displayName}
+        src={user?.profileImageUrl}
+        alt={user?.fullName as string}
+        name={user?.fullName as string}
         BadgeProps={{
           badgeContent: <BadgeStatus status={status} />,
         }}
@@ -54,11 +54,11 @@ export default function ChatNavAccount() {
         <Stack direction="row" alignItems="center" spacing={2} sx={{ py: 2, pr: 1, pl: 2.5 }}>
           <div>
             <Typography noWrap variant="subtitle2">
-              {user?.displayName}
+              {user?.fullName}
             </Typography>
 
             <Typography noWrap variant="body2" sx={{ color: 'text.secondary' }}>
-              {user?.email}
+              {user?.primaryEmailAddress?.emailAddress}
             </Typography>
           </div>
 

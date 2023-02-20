@@ -35,6 +35,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 // redux
+import { ClerkProvider, RedirectToSignIn, SignedOut, SignedIn, ClerkLoading } from '@clerk/nextjs';
 import { store } from '../redux/store';
 // utils
 import createEmotionCache from '../utils/createEmotionCache';
@@ -48,14 +49,10 @@ import ProgressBar from '../components/progress-bar';
 import SnackbarProvider from '../components/snackbar';
 import { MotionLazyContainer } from '../components/animate';
 import { ThemeSettings, SettingsProvider } from '../components/settings';
+import LoadingScreen from '../components/loading-screen/LoadingScreen';
 
 // Check our docs
 // https://docs.minimals.cc/authentication/ts-version
-
-import { AuthProvider } from '../auth/JwtContext';
-// import { AuthProvider } from '../auth/Auth0Context';
-// import { AuthProvider } from '../auth/FirebaseContext';
-// import { AuthProvider } from '../auth/AwsCognitoContext';
 
 // ----------------------------------------------------------------------
 
@@ -81,7 +78,7 @@ export default function MyApp(props: MyAppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
 
-      <AuthProvider>
+      <ClerkProvider {...pageProps}>
         <ReduxProvider store={store}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <SettingsProvider>
@@ -92,7 +89,13 @@ export default function MyApp(props: MyAppProps) {
                       <SnackbarProvider>
                         <StyledChart />
                         <ProgressBar />
-                        {getLayout(<Component {...pageProps} />)}
+                        <ClerkLoading>
+                          <LoadingScreen />
+                        </ClerkLoading>
+                        <SignedIn>{getLayout(<Component {...pageProps} />)}</SignedIn>
+                        <SignedOut>
+                          <RedirectToSignIn />
+                        </SignedOut>
                       </SnackbarProvider>
                     </ThemeLocalization>
                   </ThemeSettings>
@@ -101,7 +104,7 @@ export default function MyApp(props: MyAppProps) {
             </SettingsProvider>
           </LocalizationProvider>
         </ReduxProvider>
-      </AuthProvider>
+      </ClerkProvider>
     </CacheProvider>
   );
 }

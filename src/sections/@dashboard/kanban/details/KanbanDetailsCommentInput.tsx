@@ -1,7 +1,7 @@
 // @mui
 import { Stack, Paper, Button, Tooltip, IconButton, InputBase } from '@mui/material';
 // auth
-import { useAuthContext } from '../../../../auth/useAuthContext';
+import { useUser } from '@clerk/nextjs';
 // components
 import Iconify from '../../../../components/iconify';
 import { CustomAvatar } from '../../../../components/custom-avatar';
@@ -9,11 +9,15 @@ import { CustomAvatar } from '../../../../components/custom-avatar';
 // ----------------------------------------------------------------------
 
 export default function KanbanDetailsCommentInput() {
-  const { user } = useAuthContext();
+  const { user } = useUser();
 
   return (
     <Stack direction="row" spacing={2} sx={{ py: 3, px: 2.5 }}>
-      <CustomAvatar src={user?.photoURL} alt={user?.displayName} name={user?.displayName} />
+      <CustomAvatar
+        src={user?.profileImageUrl}
+        alt={user?.fullName as string}
+        name={user?.fullName as string}
+      />
 
       <Paper variant="outlined" sx={{ p: 1, flexGrow: 1 }}>
         <InputBase fullWidth multiline rows={2} placeholder="Type a message" sx={{ px: 1 }} />
