@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useTheme } from '@mui/material/styles';
 import { Container, Grid, Button } from '@mui/material';
 // auth
-import { useUser } from '@clerk/nextjs';
+import { useUser } from '@auth0/nextjs-auth0/client';
 // layouts
 import DashboardLayout from '../../layouts/dashboard';
 // _mock_
@@ -56,7 +56,7 @@ export default function GeneralEcommercePage() {
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
             <AppWelcome
-              title={`Congratulations! \n ${user?.fullName}`}
+              title={`Congratulations! \n ${user?.name}`}
               description="Best seller of the month You have done 57.6% more sales today."
               img={
                 <MotivationIllustration

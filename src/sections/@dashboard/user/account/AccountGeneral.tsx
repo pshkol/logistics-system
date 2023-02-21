@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid, Card, Stack, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // auth
-import { useUser } from '@clerk/nextjs';
+import { useUser } from '@auth0/nextjs-auth0/client';
 // utils
 import { fData } from '../../../../utils/formatNumber';
 // assets
@@ -57,10 +57,10 @@ export default function AccountGeneral() {
   });
 
   const defaultValues = {
-    displayName: user?.fullName || '',
-    email: user?.primaryEmailAddress?.emailAddress || '',
-    photoURL: user?.profileImageUrl || null,
-    phoneNumber: user?.primaryPhoneNumber?.phoneNumber || '',
+    displayName: user?.name || '',
+    email: user?.email || '',
+    photoURL: user?.picture || null,
+    phoneNumber: '',
     country: '',
     address: '',
     state: '',

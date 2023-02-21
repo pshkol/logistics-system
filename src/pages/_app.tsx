@@ -34,8 +34,9 @@ import { Provider as ReduxProvider } from 'react-redux';
 // @mui
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+// auth
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 // redux
-import { ClerkProvider, RedirectToSignIn, SignedOut, SignedIn, ClerkLoading } from '@clerk/nextjs';
 import { store } from '../redux/store';
 // utils
 import createEmotionCache from '../utils/createEmotionCache';
@@ -49,7 +50,6 @@ import ProgressBar from '../components/progress-bar';
 import SnackbarProvider from '../components/snackbar';
 import { MotionLazyContainer } from '../components/animate';
 import { ThemeSettings, SettingsProvider } from '../components/settings';
-import LoadingScreen from '../components/loading-screen/LoadingScreen';
 
 // Check our docs
 // https://docs.minimals.cc/authentication/ts-version
@@ -78,7 +78,7 @@ export default function MyApp(props: MyAppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
 
-      <ClerkProvider {...pageProps}>
+      <UserProvider {...pageProps}>
         <ReduxProvider store={store}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <SettingsProvider>
@@ -89,13 +89,7 @@ export default function MyApp(props: MyAppProps) {
                       <SnackbarProvider>
                         <StyledChart />
                         <ProgressBar />
-                        <ClerkLoading>
-                          <LoadingScreen />
-                        </ClerkLoading>
-                        <SignedIn>{getLayout(<Component {...pageProps} />)}</SignedIn>
-                        <SignedOut>
-                          <RedirectToSignIn />
-                        </SignedOut>
+                        {getLayout(<Component {...pageProps} />)}
                       </SnackbarProvider>
                     </ThemeLocalization>
                   </ThemeSettings>
@@ -104,7 +98,7 @@ export default function MyApp(props: MyAppProps) {
             </SettingsProvider>
           </LocalizationProvider>
         </ReduxProvider>
-      </ClerkProvider>
+      </UserProvider>
     </CacheProvider>
   );
 }

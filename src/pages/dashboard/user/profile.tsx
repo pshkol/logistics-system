@@ -4,7 +4,7 @@ import Head from 'next/head';
 // @mui
 import { Tab, Card, Tabs, Container, Box } from '@mui/material';
 // auth
-import { useUser } from '@clerk/nextjs';
+import { useUser } from '@auth0/nextjs-auth0/client';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock_
@@ -92,7 +92,7 @@ export default function UserProfilePage() {
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
             { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: user?.fullName as string },
+            { name: user?.name as string },
           ]}
         />
         <Card
@@ -103,7 +103,7 @@ export default function UserProfilePage() {
           }}
         >
           <ProfileCover
-            name={user?.fullName as string}
+            name={user?.name as string}
             role={_userAbout.role}
             cover={_userAbout.cover}
           />

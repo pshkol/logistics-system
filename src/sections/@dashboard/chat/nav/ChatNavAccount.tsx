@@ -11,7 +11,7 @@ import {
   IconButton,
 } from '@mui/material';
 // auth
-import { useUser } from '@clerk/nextjs';
+import { useUser } from '@auth0/nextjs-auth0/client';
 // components
 import Iconify from '../../../../components/iconify';
 import { CustomAvatar } from '../../../../components/custom-avatar';
@@ -40,9 +40,9 @@ export default function ChatNavAccount() {
   return (
     <>
       <CustomAvatar
-        src={user?.profileImageUrl}
-        alt={user?.fullName as string}
-        name={user?.fullName as string}
+        src={user?.picture as string}
+        alt={user?.name as string}
+        name={user?.name as string}
         BadgeProps={{
           badgeContent: <BadgeStatus status={status} />,
         }}
@@ -54,11 +54,11 @@ export default function ChatNavAccount() {
         <Stack direction="row" alignItems="center" spacing={2} sx={{ py: 2, pr: 1, pl: 2.5 }}>
           <div>
             <Typography noWrap variant="subtitle2">
-              {user?.fullName}
+              {user?.name}
             </Typography>
 
             <Typography noWrap variant="body2" sx={{ color: 'text.secondary' }}>
-              {user?.primaryEmailAddress?.emailAddress}
+              {user?.email}
             </Typography>
           </div>
 

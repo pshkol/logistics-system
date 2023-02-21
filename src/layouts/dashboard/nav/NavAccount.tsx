@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 import { styled, alpha } from '@mui/material/styles';
 import { Box, Link, Typography } from '@mui/material';
 // auth
-import { useUser } from '@clerk/nextjs';
+import { useUser } from '@auth0/nextjs-auth0/client';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
@@ -32,14 +32,14 @@ export default function NavAccount() {
     <Link component={NextLink} href={PATH_DASHBOARD.user.account} underline="none" color="inherit">
       <StyledRoot>
         <CustomAvatar
-          src={user?.profileImageUrl}
-          alt={user?.fullName as string}
-          name={user?.fullName as string}
+          src={user?.picture as string}
+          alt={user?.name as string}
+          name={user?.name as string}
         />
 
         <Box sx={{ ml: 2, minWidth: 0 }}>
           <Typography variant="subtitle2" noWrap>
-            {user?.fullName}
+            {user?.name}
           </Typography>
         </Box>
       </StyledRoot>

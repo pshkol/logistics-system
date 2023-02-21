@@ -16,7 +16,7 @@ import {
   FormControlLabel,
 } from '@mui/material';
 // auth
-import { useUser } from '@clerk/nextjs';
+import { useUser } from '@auth0/nextjs-auth0/client';
 // @types
 import { IUserProfilePost } from '../../../../../@types/user';
 // utils
@@ -82,14 +82,14 @@ export default function ProfilePostCard({ post }: Props) {
         disableTypography
         avatar={
           <CustomAvatar
-            src={user?.profileImageUrl}
-            alt={user?.fullName as string}
-            name={user?.fullName as string}
+            src={user?.picture as string}
+            alt={user?.name as string}
+            name={user?.name as string}
           />
         }
         title={
           <Link color="inherit" variant="subtitle2">
-            {user?.fullName}
+            {user?.name}
           </Link>
         }
         subheader={
@@ -197,9 +197,9 @@ export default function ProfilePostCard({ post }: Props) {
         }}
       >
         <CustomAvatar
-          src={user?.profileImageUrl}
-          alt={user?.fullName as string}
-          name={user?.fullName as string}
+          src={user?.picture as string}
+          alt={user?.name as string}
+          name={user?.name as string}
         />
 
         <InputBase

@@ -18,8 +18,7 @@
     "re-build": "rm -rf .next .swc _static node_modules && yarn install && yarn build"
   },
   "dependencies": {
-    "@auth0/auth0-spa-js": "^2.0.2",
-    "@clerk/nextjs": "^4.10.2",
+    "@auth0/nextjs-auth0": "^2.2.1",
     "@emotion/cache": "^11.10.5",
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
@@ -49,7 +48,6 @@
     "axios": "^1.2.3",
     "change-case": "^4.1.2",
     "date-fns": "^2.29.3",
-    "firebase": "^9.15.0",
     "framer-motion": "^8.4.7",
     "highlight.js": "^11.7.0",
     "i18next": "^22.4.9",

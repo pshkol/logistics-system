@@ -1,7 +1,7 @@
 // @mui
 import { Stack, Paper, Button, Tooltip, IconButton, InputBase } from '@mui/material';
 // auth
-import { useUser } from '@clerk/nextjs';
+import { useUser } from '@auth0/nextjs-auth0/client';
 // components
 import Iconify from '../../../../components/iconify';
 import { CustomAvatar } from '../../../../components/custom-avatar';
@@ -14,9 +14,9 @@ export default function KanbanDetailsCommentInput() {
   return (
     <Stack direction="row" spacing={2} sx={{ py: 3, px: 2.5 }}>
       <CustomAvatar
-        src={user?.profileImageUrl}
-        alt={user?.fullName as string}
-        name={user?.fullName as string}
+        src={user?.picture as string}
+        alt={user?.name as string}
+        name={user?.name as string}
       />
 
       <Paper variant="outlined" sx={{ p: 1, flexGrow: 1 }}>

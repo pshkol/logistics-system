@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 // @mui
 import { Box } from '@mui/material';
 // hooks
@@ -11,6 +11,7 @@ import Header from './header';
 import NavMini from './nav/NavMini';
 import NavVertical from './nav/NavVertical';
 import NavHorizontal from './nav/NavHorizontal';
+import AuthGuard from '../../guards/AuthGuard';
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +40,7 @@ export default function DashboardLayout({ children }: Props) {
 
   const renderNavVertical = <NavVertical openNav={open} onCloseNav={handleClose} />;
 
-  const renderContent = () => {
+  const renderContent = (): ReactNode => {
     if (isNavHorizontal) {
       return (
         <>
@@ -89,5 +90,5 @@ export default function DashboardLayout({ children }: Props) {
     );
   };
 
-  return renderContent();
+  return <AuthGuard>{renderContent()}</AuthGuard>;
 }

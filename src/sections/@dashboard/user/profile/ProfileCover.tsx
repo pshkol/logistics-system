@@ -2,7 +2,7 @@
 import { styled } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
 // auth
-import { useUser } from '@clerk/nextjs';
+import { useUser } from '@auth0/nextjs-auth0/client';
 // @types
 import { IUserProfileCover } from '../../../../@types/user';
 // utils
@@ -51,9 +51,9 @@ export default function ProfileCover({ name, role, cover }: IUserProfileCover) {
     <StyledRoot>
       <StyledInfo>
         <CustomAvatar
-          src={user?.profileImageUrl}
-          alt={user?.fullName as string}
-          name={user?.fullName as string}
+          src={user?.picture as string}
+          alt={user?.name as string}
+          name={user?.name as string}
           sx={{
             mx: 'auto',
             borderWidth: 2,
